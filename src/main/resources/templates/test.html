@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <h1>Test</h1>
+</head>
+<body>
+<!--div th:each="dish : ${dishes}" class="alert alert-info mt-2">
+    <p th:text="${dish.name}"></p>
+</div-->
+<thead>
+<tr>
+    <th class="px-3">ID</th>
+    <th class="px-3">Name</th>
+    <th class="px-3">Beschreibung</th>
+    <th class="px-3">Preis</th>
+</tr>
+</thead>
+<tfoot/>
+<tbody>
+<tr th:each="dish : ${dishes}">
+    <td class="px-3" th:text="${dish.getId}"></td>
+    <td class="px-3" th:text="${dish.name}"> "name"</td>
+    <td class="px-3" th:text="${dish.description}"></td>
+    <td class="px-3" th:text="${dish.price}"></td>
+</tr>
+</tbody>
+
+</body>
