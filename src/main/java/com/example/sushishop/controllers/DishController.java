@@ -29,7 +29,9 @@ public class DishController {
     @Autowired
     private OrderService orderService;
 
+    public DishController() {
 
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model){

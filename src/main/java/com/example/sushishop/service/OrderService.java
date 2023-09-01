@@ -16,7 +16,19 @@ public class OrderService {
     
     private Order order = null;
 
-    private final List<OrderItem> orderItemList = new ArrayList<>();
+    private List<OrderItem> orderItemList = new ArrayList<>();
+
+    public OrderService() {
+    }
+
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public List<OrderItem> getOrderItemList() {
         return orderItemList;
@@ -28,14 +40,6 @@ public class OrderService {
 
     public void removeOrderItem(OrderItem oi) {
         orderItemList.remove(oi);
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public double sumTotal() {
