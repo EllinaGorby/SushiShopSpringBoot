@@ -59,13 +59,22 @@ public class SecurityConfig {
 //                .and()
 //                .anyRequest().authenticated()));
 //        return http.build();
-        //TODO
+
         return http.csrf().disable()
                 .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/home.html").hasAnyRole("User", "Admin")
+                .requestMatchers("/sushi-shop","/minusDish/**","/plusDish/**").permitAll()
+                //.requestMatchers("/order.html").hasAnyRole("User", "Admin")
                 //.requestMatchers("/home.html", "/sushi-shop", "/sushi-shop/**").hasAnyRole("User", "Admin")
                 .anyRequest().authenticated())
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").permitAll()
+                //TODO authenticationSuccessHandler()
+                /*
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticateTheUser")
+                .successHandler(authenticationSuccessHandler());
+                * */
+
                 .and()
                 .logout().permitAll()
                 .and()
