@@ -1,10 +1,13 @@
 package com.example.sushishop.controllers;
 
+import com.example.sushishop.configurations.AuthenticationFacade;
+import com.example.sushishop.configurations.CustomUserDetails;
 import com.example.sushishop.model.Order;
 import com.example.sushishop.service.DishService;
 import com.example.sushishop.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,16 +28,21 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+
     public OrderController() {
     }
     
     @PostMapping(path = "/order")
 //    @RequestMapping(method = RequestMethod.GET)
-    public String orederSite(Model model){
+    public String orederSite(Model model,@AuthenticationPrincipal CustomUserDetails userDetails){
         model.addAttribute("orderItemList", orderService.getOrderItemList());
         model.addAttribute("sumTotal", orderService.sumTotal());
         orderService.setOrder(new Order());
         model.addAttribute("order", orderService.getOrder());
+        if(userDetails!=null) {
+            model.addAttribute("customer", userDetails.getCustomer());
+        }else
+            model.addAttribute("customer", null);
         
         return "order.html";
         

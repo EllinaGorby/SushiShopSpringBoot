@@ -1,21 +1,31 @@
 package com.example.sushishop.controllers;
 
 /**
- *
  * @author Elina Gorby
  * Class for testing
  */
+
+import com.example.sushishop.configurations.CustomUserDetails;
+import com.example.sushishop.model.Customer;
 import com.example.sushishop.model.Dish;
+
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.sushishop.repository.DishRepository;
 import com.example.sushishop.service.DishService;
 import com.example.sushishop.service.OrderService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.security.core.Authentication;
 
 @Controller
 public class MainController {
@@ -26,8 +36,6 @@ public class MainController {
     private DishService dishService;
     @Autowired
     private OrderService orderService;
-
-
 
 
     @GetMapping("/")
@@ -42,7 +50,7 @@ public class MainController {
         Dish d7 = new Dish(7, "Alaska Inside Out", "mit Lachs und Avocado innen und orangen Capelinrogen außen", 2.4, "Roll");
         Dish d8 = new Dish(8, "New York Inside Out", "mit geräuchertem Lachs, Lauchzwiebeln und Avocado innen und Sesam außen", 4.4, "Roll");
 
-        
+
         dishs.add(d1);
         dishs.add(d2);
         dishs.add(d3);
@@ -52,12 +60,12 @@ public class MainController {
         dishs.add(d7);
         dishs.add(d8);
         model.addAttribute("listDish1", dishs);
-        
+
         return "home.html";
     }
 
     @GetMapping("/test")
-    public String test(Model model){
+    public String test(Model model) {
         //Iterable<Dish> dishes = dishRepository.findAll();
         /*model.addAttribute("dishes",dishService.getDishList());
         return "test.html";*/
@@ -66,6 +74,19 @@ public class MainController {
         model.addAttribute("sumTotal", orderService.sumTotal());
 
         return "home.html";
+    }
+
+    @RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+
+    public String getUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        //TODO
+        if (userDetails!=null) {
+            return "User Details: " + userDetails.getUsername() + " Lastname " + userDetails.getCustomer().getLastname();
+        } else {
+            return "not authoreized";
+        }
+
     }
 
 }

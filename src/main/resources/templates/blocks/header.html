@@ -11,11 +11,15 @@
             <span th:unless="${#authorization.expression('isAuthenticated()')}">
 
             </span-->
-            <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>
-            <span th:remove="tag" sec:authentication="name">
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out"/>
-            </form>
+            <div sec:authorize="isAuthenticated()">
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/login">Login</a>
+            </div>
+            <div sec:authorize="isAuthenticated()">
+                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/logout">logout</a>
+                <!--form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form-->
+            </div>
             </span>
             <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="#">Kontakt</a>
         </nav>

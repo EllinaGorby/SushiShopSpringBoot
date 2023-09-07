@@ -8,6 +8,20 @@
 </head>
 <body>
 <header th:insert="~{blocks/header :: header}"></header>
+<p>User <span th:text="${username}"></span></p>
+<p>Spring Security Thymeleaf tutorial</p>
+<div sec:authorize="hasRole('USER')">Text visible to user.</div>
+<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+<div sec:authorize="isAuthenticated()">
+    Text visible only to authenticated users.
+</div>
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span sec:authentication="name()"></span></div>
+
+<div th:if="${authorization.isAuthenticated()}">
+    <p> authenticated <span th:text="${authorization.getName()}"></span></p>
+</div>
+
 <table>
     <thead>
     <tr>

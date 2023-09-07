@@ -66,7 +66,8 @@ public class SecurityConfig {
                 //.requestMatchers("/order.html").hasAnyRole("User", "Admin")
                 //.requestMatchers("/home.html", "/sushi-shop", "/sushi-shop/**").hasAnyRole("User", "Admin")
                 .anyRequest().authenticated())
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin()/*.loginPage("/login")*/
+                .defaultSuccessUrl("/sushi-shop").permitAll()
                 //TODO authenticationSuccessHandler()
                 /*
                 .formLogin()

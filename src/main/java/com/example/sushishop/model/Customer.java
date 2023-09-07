@@ -66,13 +66,13 @@ public class Customer {
 
     }
 
-    public String getName() {
+    public String getFullName() {
         return getFirstname() + " " + getLastname();
     }
 
     @Override
     public String toString() {
-        return getName();
+        return getFullName();
     }
 
 }

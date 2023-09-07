@@ -17,18 +17,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class CustomUserDetails implements UserDetails{
     
     private Customer customer;
-    
-//    private Collection<? extends GrantedAuthority> authorities;
+
 
     public CustomUserDetails(Customer customer) {
         this.customer = customer;
-//        this.authorities = authorities;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(customer.getRolle());
 		return Arrays.asList(authority);
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 
     @Override
