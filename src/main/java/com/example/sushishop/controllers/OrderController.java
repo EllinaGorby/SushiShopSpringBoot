@@ -48,13 +48,13 @@ public class OrderController {
         
     }
 
-//    @PostMapping(path = "/orderCreate")
-//    public String orederSite(){
-//        if (this.initCustomerInfo(request))
-//        
-//        return "order.html";
-//    }
-//    
+    @PostMapping(path = "/orderCreated")
+    public String orderCreated(Model model){
+        //TODO filling and save for order
+        model.addAttribute("order",orderService.getOrder());
+        return "order-created.html";
+    }
+
     
 //    public boolean initCustomerInfo(HttpServletRequest request) {
 //        String buttonOrderString = request.getParameter("buttonOrder");
