@@ -4,10 +4,7 @@
  */
 package com.example.sushishop.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 /**
@@ -30,6 +27,7 @@ public class Customer {
     private String rolle;
     private boolean enabled;
     private String password;
+    @Column(columnDefinition = "VARCHAR(255)")
     private String email;
 
     public Customer() {

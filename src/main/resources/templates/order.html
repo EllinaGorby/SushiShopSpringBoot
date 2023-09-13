@@ -43,18 +43,19 @@
 <p class="px-3"><b> Gesamtbetrag: <span th:text="${sumTotal}"></span> Euro</b></p>
 <div class="grid-customer-container">
     <h4>Bitte geben Sie Ihre Daten für die Lieferung ein</h4>
-    <input type="text" name="name" placeholder="Name" th:value="${customer != null ? customer.getFullName() : ''}" />
-    <input type="text" name="phone" placeholder="Telephone"
-           th:value="${customer != null} ? ${customer.getPhone()} : ''"/>
-    <input type="text" name="email" placeholder="E-mail" th:value="${customer != null} ? ${customer.getEmail()} : ''"/>
-    <input type="text" name="address" placeholder="Adresse"
-           th:value="${customer != null} ? ${customer.getAddress()} : ''"/>
-
-    <input type="text" name="date" id="datepicker" placeholder="Liferungsdatum" th:value="${#dates.format(#dates.createNow(), 'yyyy-mm-dd')}" />
-    <input type="text" name="time" placeholder="Zeit" value=""/>
-
-
     <form method="POST" th:action="@{/orderCreated}">
+        <input type="text" name="name" placeholder="Name" th:value="${customer != null ? customer.getFullName() : ''}"/>
+        <input type="text" name="phone" placeholder="Telephone"
+               th:value="${customer != null} ? ${customer.getPhone()} : ''"/>
+        <input type="text" name="email" placeholder="E-mail"
+               th:value="${customer != null} ? ${customer.getEmail()} : ''"/>
+        <input type="text" name="address" placeholder="Adresse"
+               th:value="${customer != null} ? ${customer.getAddress()} : ''"/>
+
+        <input type="text" name="date" id="datepicker" placeholder="Liferungsdatum"
+               th:value="${#dates.format(#dates.createNow(), 'yyyy-mm-dd')}"/>
+        <input type="text" name="time" placeholder="Zeit" value=""/>
+
         <button type="submit" class="btn btn-primary mt-3">Bestellen</button>
     </form>
 </div>

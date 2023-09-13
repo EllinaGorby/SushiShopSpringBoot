@@ -21,14 +21,12 @@ public class DishService {
  
     private DishRepository dishRepository;
     
-    
+    //TODO prüfen, ob es nötig
     @Autowired
     public DishService(DishRepository dishRepository) {
         this.dishRepository  = dishRepository;
     }
     
-    
-        
 
     public List<Dish> getDishList() {
         return dishRepository.findAll();

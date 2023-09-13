@@ -1,16 +1,21 @@
 package com.example.sushishop.controllers;
 
-import com.example.sushishop.configurations.AuthenticationFacade;
+
 import com.example.sushishop.configurations.CustomUserDetails;
 import com.example.sushishop.model.Order;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.example.sushishop.service.DishService;
 import com.example.sushishop.service.OrderService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.time.LocalDateTime;
 
 
 /**
@@ -27,6 +32,8 @@ public class OrderController {
     private DishService dishService;
     @Autowired
     private OrderService orderService;
+
+    private static Logger log = LoggerFactory.getLogger(OrderController.class);
 
 
     public OrderController() {
@@ -49,9 +56,18 @@ public class OrderController {
     }
 
     @PostMapping(path = "/orderCreated")
-    public String orderCreated(Model model){
+    public String orderCreated(Model model, HttpServletRequest request){
+        orderService.getOrder().setName(request.getParameter("name"));
+        orderService.getOrder().setPhone(request.getParameter("phone"));
+        orderService.getOrder().setEmail(request.getParameter("email"));
+        log.info("++++++++++++++++++++++Name ist "+ request.getParameter("name"));
+        //orderService.getOrder().setDateOfDilivery(LocalDateTime.parse(request.getParameter("date")));
+        //orderService.getOrder().set(request.getParameter("time"));
+
         //TODO filling and save for order
+        orderService.saveOrderInRepository();
         model.addAttribute("order",orderService.getOrder());
+
         return "order-created.html";
     }
 
